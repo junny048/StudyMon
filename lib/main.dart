@@ -87,7 +87,29 @@ class _StudyMonAppState extends State<StudyMonApp> {
     return MaterialApp(
       title: 'StudyMon',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2E7D32)),
+        useMaterial3: true,
+        fontFamily: 'Georgia',
+        colorScheme: const ColorScheme.light(
+          primary: Color(0xFF0A7A5A),
+          onPrimary: Colors.white,
+          secondary: Color(0xFFE8B44B),
+          onSecondary: Color(0xFF1C1C1C),
+          surface: Color(0xFFF7F9F6),
+          onSurface: Color(0xFF1B2A24),
+        ),
+        scaffoldBackgroundColor: const Color(0xFFF1F5EF),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          foregroundColor: Color(0xFF1B2A24),
+        ),
+        cardTheme: CardThemeData(
+          color: Colors.white.withValues(alpha: 0.92),
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+        ),
       ),
       home: Builder(
         builder: (context) {

@@ -119,6 +119,9 @@ class _StudyTimerScreenState extends State<StudyTimerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final double progress =
+        1 - (_remaining.inSeconds / _selectedDuration.inSeconds).clamp(0, 1);
+
     return Scaffold(
       appBar: AppBar(title: const Text('Focus Timer')),
       body: Padding(
@@ -133,6 +136,7 @@ class _StudyTimerScreenState extends State<StudyTimerScreen> {
                   ChoiceChip(
                     label: Text('$minutes min'),
                     selected: _selectedDuration.inMinutes == minutes,
+                    showCheckmark: false,
                     onSelected: _isRunning
                         ? null
                         : (_) {
@@ -150,15 +154,66 @@ class _StudyTimerScreenState extends State<StudyTimerScreen> {
             ),
             const SizedBox(height: 24),
             Center(
-              child: Text(
-                _formatClock(_remaining),
-                style: Theme.of(context).textTheme.displayMedium,
+              child: Container(
+                width: 240,
+                height: 240,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: <Color>[Color(0xFF0A7A5A), Color(0xFF1EA07A)],
+                  ),
+                  boxShadow: const <BoxShadow>[
+                    BoxShadow(
+                      color: Color(0x330A7A5A),
+                      blurRadius: 26,
+                      offset: Offset(0, 12),
+                    ),
+                  ],
+                ),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 220,
+                      height: 220,
+                      child: CircularProgressIndicator(
+                        value: progress,
+                        strokeWidth: 8,
+                        color: const Color(0xFFFFD88A),
+                        backgroundColor: const Color(0x33FFFFFF),
+                      ),
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text(
+                          _formatClock(_remaining),
+                          style: Theme.of(context).textTheme.displaySmall
+                              ?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700,
+                              ),
+                        ),
+                        const SizedBox(height: 6),
+                        const Text(
+                          'Focus Mode',
+                          style: TextStyle(color: Colors.white70),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             const Spacer(),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
+                style: FilledButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                ),
                 onPressed: _isRunning ? null : _startTimer,
                 child: const Text('Start Study'),
               ),

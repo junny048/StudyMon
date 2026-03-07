@@ -11,9 +11,32 @@ class ExpBar extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(label),
+        Text(
+          label,
+          style: Theme.of(
+            context,
+          ).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w700),
+        ),
         const SizedBox(height: 6),
-        LinearProgressIndicator(value: progress),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(99),
+          child: Stack(
+            children: <Widget>[
+              Container(height: 12, color: const Color(0xFFE2EAE4)),
+              FractionallySizedBox(
+                widthFactor: progress.clamp(0.0, 1.0),
+                child: Container(
+                  height: 12,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: <Color>[Color(0xFFE8B44B), Color(0xFFFFD88A)],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
