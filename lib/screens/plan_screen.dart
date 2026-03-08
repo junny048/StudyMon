@@ -79,6 +79,11 @@ class _PlanScreenState extends State<PlanScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: <Widget>[
+          if (!widget.aiPlannerService.isConfigured)
+            const Padding(
+              padding: EdgeInsets.only(bottom: 10),
+              child: Text('OPENAI_API_KEY가 없어 템플릿 플랜으로 생성됩니다.'),
+            ),
           TextField(
             controller: _goalController,
             decoration: const InputDecoration(

@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
     required this.onStartStudy,
     required this.onOpenMonster,
     required this.onOpenPlanner,
+    required this.onSignOut,
   });
 
   final Monster monster;
@@ -19,6 +20,7 @@ class HomeScreen extends StatelessWidget {
   final VoidCallback onStartStudy;
   final VoidCallback onOpenMonster;
   final VoidCallback onOpenPlanner;
+  final VoidCallback onSignOut;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,11 @@ class HomeScreen extends StatelessWidget {
             onPressed: onOpenMonster,
             icon: const Icon(Icons.pets_outlined),
             tooltip: 'Monster',
+          ),
+          IconButton(
+            onPressed: onSignOut,
+            icon: const Icon(Icons.logout),
+            tooltip: 'Sign out',
           ),
         ],
       ),

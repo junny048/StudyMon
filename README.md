@@ -1,17 +1,32 @@
-# studymon
+# StudyMon
 
-A new Flutter project.
+Study timer + monster growth productivity app built with Flutter.
 
-## Getting Started
+## Supabase Auth Setup
 
-This project is a starting point for a Flutter application.
+Auth is enabled only when both Dart defines are provided:
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+flutter run --dart-define=SUPABASE_URL=YOUR_URL --dart-define=SUPABASE_ANON_KEY=YOUR_KEY
+```
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+AI planner uses OpenAI when `OPENAI_API_KEY` is set:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+flutter run --dart-define=SUPABASE_URL=YOUR_URL --dart-define=SUPABASE_ANON_KEY=YOUR_KEY --dart-define=OPENAI_API_KEY=YOUR_OPENAI_API_KEY
+```
+
+## Focus Mode (Android)
+
+Study timer includes Android app blocking MVP for selected apps.
+
+1. Turn on `Focus Mode (App Blocking)` in timer screen.
+2. Select blocked apps (Instagram/YouTube/TikTok/X/Facebook).
+3. On first run, grant `Usage Access` permission when prompted.
+
+When a blocked app comes to foreground during a running timer, StudyMon reopens automatically.
+
+## Required Supabase Tables
+
+Run the SQL in [supabase/migrations/001_init.sql](C:\Users\mamekuma\Desktop\StudyMon\supabase\migrations\001_init.sql).  
+It includes table creation, RLS policies for user-isolated access, and an `auth.users` -> `profiles` auto-create trigger.
