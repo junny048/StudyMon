@@ -49,6 +49,24 @@ class Monster {
     );
   }
 
+  Map<String, Object> toMap() {
+    return <String, Object>{
+      'id': id,
+      'userId': userId,
+      'name': name,
+      'exp': exp,
+    };
+  }
+
+  factory Monster.fromMap(Map<String, dynamic> map) {
+    return Monster.fromExp(
+      id: map['id'] as String,
+      userId: map['userId'] as String,
+      name: map['name'] as String,
+      exp: map['exp'] as int,
+    );
+  }
+
   static int _levelForExp(int exp) {
     for (int i = _levelThresholds.length - 1; i >= 0; i--) {
       if (exp >= _levelThresholds[i]) {
